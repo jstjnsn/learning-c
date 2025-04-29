@@ -1,0 +1,13 @@
+name: Github Actions C Unit Tests
+run-name: ${{ github.actor }} is running C Unit Tests with Github Actions.
+on: [push]
+jobs:
+  CUnitTests:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Starting C unit tests"
+      - name: Check out repo
+        uses: actions/checkout@v4
+      - name: Run C unit tests
+        uses: make clean && make test && ./test
+      - run: echo "Status = ${{ job.status }}"
