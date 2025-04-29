@@ -9,5 +9,6 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v4
       - name: Run C unit tests
-        uses: make clean && make test && ./test
+        run: |
+          make clean && make test && ./test
       - run: echo "Status = ${{ job.status }}"
