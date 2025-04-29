@@ -1,16 +1,43 @@
-CXX=gcc
-CFLAGS=-std=c99 -Wall
-TESTFLAGS=-fprofile-arcs -ftest-coverage
+UNAME_S := $(shell uname -s)
 
-main:
-	$(CXX) $(CFLAGS) -v -o main main.c counter.c
+ifeq ($(UNAME_S),Darwin)
+	CC ?= gcc-14
+else
+	CC ?= gcc
+endif
 
-test: test.c counter.h counter.c
-	$(CXX) $(CFLAGS) $(TESTFLAGS) -v -o test test.c counter.c
-	./test
+CFLAGS := -Wall -Wextra -O0 -g -MMD -MP
+TESTFLAGS := -fprofile-arcs -ftest-coverage
 
-coverage:
-	gcov -c -p counter
+SRCS := test.c counter.c
+OBJS := $(SRCS:.c=.o) # replaces .c with .o in SRCS, test.c -> test.o
+TARGET := test
+
+.PHONY: all clean
+
+all: $(TARGET)
+
+main: main.c counter.c
+	$(CC) $(CFLAGS) -o main main.c counter.c
+	./main
+
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(TESTFLAGS) -o $@ $^
+
+$(TARGET)-run: $(TARGET)
+	./$(TARGET)
+
+$(TARGET)-run-cov: $(TARGET)
+	./$(TARGET)
+	gcov -c -p counter 
+
+# TODO: update gcov command with test-counter when gcc is installed on laptop.
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(TESTFLAGS) -c $< -o $@
+
+-include $(OBJS:.o=.d)
 
 clean:
-	rm -f *.o test *.gcov *.gcda *.gcno main
+	rm -f $(OBJS) $(TARGET) *.d *.gcno *.gcda
+

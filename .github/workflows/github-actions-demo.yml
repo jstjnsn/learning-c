@@ -11,9 +11,5 @@ jobs:
       - name: Run C unit tests
         run: |
           cd testing
-          make clean 
-          make test
-          ls -lah
-          make coverage
-          ./test
+          make test-run-cov
       - run: echo "Status = ${{ job.status }}"
