@@ -10,5 +10,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Run C unit tests
         run: |
-          make clean && make test && ./test
+          cd testing
+          make clean 
+          make test
+          ./test
       - run: echo "Status = ${{ job.status }}"
