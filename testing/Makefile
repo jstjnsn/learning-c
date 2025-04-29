@@ -8,6 +8,8 @@ main:
 test: test.c counter.h counter.c
 	$(CXX) $(CFLAGS) $(TESTFLAGS) -v -o test test.c counter.c
 	./test
+
+coverage:
 	gcov -c -p counter
 
 clean:

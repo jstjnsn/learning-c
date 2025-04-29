@@ -13,5 +13,7 @@ jobs:
           cd testing
           make clean 
           make test
+          ls -lah
+          make coverage
           ./test
       - run: echo "Status = ${{ job.status }}"
