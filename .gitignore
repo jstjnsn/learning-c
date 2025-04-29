@@ -6,4 +6,5 @@
 */*.gcno
 */*.gcda
 */*.gcov
+*/*.dSYM/
 Makefile

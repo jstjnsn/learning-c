@@ -2,6 +2,8 @@
 
 This repository contains some projects I'm working on to learn more about the C programming language.
 
+[![Github Actions C Unit Tests](https://github.com/jstjnsn/learning-c/actions/workflows/github-actions-demo.yml/badge.svg)](https://github.com/jstjnsn/learning-c/actions/workflows/github-actions-demo.yml)
+
 ## Lessons learned
 
 # GCC
