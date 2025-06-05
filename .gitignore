@@ -3,4 +3,12 @@
 !*.*
 !*/
 
+*/*.o
+*/*.d
+*/*.gcno
+*/*.gcda
+*/*.gcov
+*/*.dSYM/
+Makefile
+
 *.out
